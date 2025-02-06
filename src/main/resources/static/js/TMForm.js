@@ -110,35 +110,35 @@
 				return el.val()||false
 			}
 			
-			function formSubmit(){
-				$('[data-constraints]',form).trigger('validate.form')
+			// function formSubmit(){
+			// 	$('[data-constraints]',form).trigger('validate.form')
 				
-				if(!$('label.'+opt.invalidClass+',label.'+opt.emptyClass,form).length){					
-					$.ajax({
-						type:"POST"
-						,url:opt.mailHandlerURL
-						,data:{
-							name:getValue($('label.name input'))
-							,email:getValue($('label.email input'))
-							,phone:getValue($('label.phone input'))
-							,fax:getValue($('label.fax input'))
-							,state:getValue($('label.state input'))
-							,message:getValue($('label.message textarea'))
-							,owner_email:opt.ownerEmail||'#'
-							,stripHTML:opt.stripHTML
-						}
-						,success: function(e){							
-							form.addClass(opt.successClass)
-							setTimeout(function(){
-								form
-								.removeClass(opt.successClass)
-								.trigger('reset')
-							},opt.successShowDelay)
-						}
-					})					
-				}				
-				return false
-			}
+			// 	if(!$('label.'+opt.invalidClass+',label.'+opt.emptyClass,form).length){					
+			// 		$.ajax({
+			// 			type:"POST"
+			// 			,url:opt.mailHandlerURL
+			// 			,data:{
+			// 				name:getValue($('label.name input'))
+			// 				,email:getValue($('label.email input'))
+			// 				,phone:getValue($('label.phone input'))
+			// 				,fax:getValue($('label.fax input'))
+			// 				,state:getValue($('label.state input'))
+			// 				,message:getValue($('label.message textarea'))
+			// 				,owner_email:opt.ownerEmail||'#'
+			// 				,stripHTML:opt.stripHTML
+			// 			}
+			// 			,success: function(e){							
+			// 				form.addClass(opt.successClass)
+			// 				setTimeout(function(){
+			// 					form
+			// 					.removeClass(opt.successClass)
+			// 					.trigger('reset')
+			// 				},opt.successShowDelay)
+			// 			}
+			// 		})					
+			// 	}				
+			// 	return false
+			// }
 			
 			function formReset(){
 				fieldDesolation($('[data-constraints]',form))					
