@@ -9,13 +9,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import in.myorg.model.BookingForm;
 import in.myorg.model.ContactForm;
+import in.myorg.service.BookingFormService;
 import in.myorg.service.ContactFormService;
 import jakarta.validation.Valid;
 
 @Controller
 public class MyController {
 	private ContactFormService contactFormServiceImpl;
+	private BookingFormService bookingFormServiceImpl;
+
+	@Autowired
+	public void setBookingFormServiceImpl(BookingFormService bookingFormServiceImpl) {
+		this.bookingFormServiceImpl = bookingFormServiceImpl;
+	}
 
 	@Autowired
 	public void setContactFormServiceImpl(ContactFormService contactFormServiceImpl) {
@@ -26,8 +34,13 @@ public class MyController {
 		return contactFormServiceImpl;
 	}
 
-	@GetMapping(path = { "welcome", "home", "" })
-	public String viewWelcome() {
+	public BookingFormService getBookingFormServiceImpl() {
+		return bookingFormServiceImpl;
+	}
+
+	@GetMapping(path = { "welcome", "home", "/","index" })
+	public String viewWelcome(Model m) {
+		m.addAttribute("bookingForm", new BookingForm());
 		return "index";
 	}
 
@@ -73,6 +86,31 @@ public class MyController {
 		}
 
 		return "redirect:/contacts";// new request and new get request
+
+	}
+
+	@PostMapping("bookingform")
+	public String bookingform(@Valid @ModelAttribute BookingForm bookingForm, BindingResult br,
+			RedirectAttributes redirectAttributes, Model m
+
+	) {
+
+		if (br.hasErrors()) {
+			m.addAttribute("bindingresult", br);
+			return "index";
+		} else if (bookingForm.getAdult() + bookingForm.getChildren() > 4) {
+			m.addAttribute("message", "The total number of adult and children can not exceed 4");
+			return "index";
+		}
+		BookingForm bf = bookingFormServiceImpl.saveBookingFormService(bookingForm);
+		if (bf != null) {
+			redirectAttributes.addFlashAttribute("message", "Booking done successfully");
+		} else {
+			redirectAttributes.addFlashAttribute("message", "message not sent ");
+
+		}
+
+		return "redirect:/welcome";// new request and new get request
 
 	}
 
