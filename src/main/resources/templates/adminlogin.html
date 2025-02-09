@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Admin Login Background: Professional, Dark Yellow Gradient */
+        body {
+            background: linear-gradient(135deg, #F39C12, #F1C40F);
+            /* Deep yellow gradient */
+            background-size: cover;
+            background-attachment: fixed;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        /* Subtle dark overlay for readability */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            /* Dark overlay for better contrast */
+            z-index: -1;
+        }
+
+        /* Admin Login Card with modern design */
+        .login-card {
+            background-color: rgba(255, 255, 255, 0.85);
+            /* Slight transparency for a modern look */
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hover effect for form card */
+        .login-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Admin Login Header */
+        .login-header {
+            font-size: 30px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Input Fields Styling */
+        .form-control {
+            border-radius: 25px;
+            padding: 15px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control:focus {
+            border-color: #F39C12;
+            box-shadow: 0 0 8px rgba(243, 156, 18, 0.7);
+            background-color: #fafafa;
+        }
+
+        /* Login Button Styling */
+        .btn-custom {
+            background-color: #F39C12;
+            color: white;
+            font-size: 18px;
+            padding: 14px;
+            border-radius: 25px;
+            width: 100%;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #F1C40F;
+            transform: translateY(-5px);
+        }
+
+        /* Status Message Styling */
+        .status-message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-card">
+        <h2 class="login-header">Admin Login</h2>
+        <form action="/Login" method="POST">
+            <div class="mb-3">
+                <input type="text" name="username" class="form-control" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn btn-custom">Login</button>
+        </form>
+
+        <!-- Status messages -->
+        <div class="status-message">
+
+            <div>
+                <h5 class="status-invalid" style="color: red;" th:if="${param.error}">Invalid Username or Password</h5>
+            </div>
+            <h5 class="status-success" style="color: green;" th:if="${logout}">You have been successfully logout </h5>
+            <div>
+            <div>
+            <a href="/welcome">Go To Site</a>
+
+            </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS (Optional for interactivity) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

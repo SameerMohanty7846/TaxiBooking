@@ -13,6 +13,8 @@ import in.myorg.model.BookingForm;
 import in.myorg.model.ContactForm;
 import in.myorg.service.BookingFormService;
 import in.myorg.service.ContactFormService;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @Controller
@@ -38,7 +40,7 @@ public class MyController {
 		return bookingFormServiceImpl;
 	}
 
-	@GetMapping(path = { "welcome", "home", "/","index" })
+	@GetMapping(path = { "welcome", "home", "/", "index" })
 	public String viewWelcome(Model m) {
 		m.addAttribute("bookingForm", new BookingForm());
 		return "index";
@@ -112,6 +114,17 @@ public class MyController {
 
 		return "redirect:/welcome";// new request and new get request
 
+	}
+
+	@GetMapping("Login")
+	public String adminLoginView(HttpServletRequest request, Model model) {
+		ServletContext context = request.getServletContext();
+		Object attribute = context.getAttribute("logout");
+		if(attribute instanceof Boolean) {
+			model.addAttribute("logout", attribute);
+			
+		}
+		return "adminlogin";
 	}
 
 }
