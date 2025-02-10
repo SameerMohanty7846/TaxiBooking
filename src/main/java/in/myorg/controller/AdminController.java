@@ -68,6 +68,7 @@ public class AdminController {
 
 	@GetMapping("readAllBookings")
 	public String readAllBookings(Model model) {
+		System.out.println("ADMIN PANEL UPDATED");
 		List<BookingForm> list = bookingFormServiceImpl.getAllBookingInfo();
 		model.addAttribute("allbookings", list);
 		return "admin/readallbookings";
