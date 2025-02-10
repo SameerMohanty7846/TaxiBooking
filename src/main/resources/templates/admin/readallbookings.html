@@ -55,29 +55,29 @@
         }
 
         .table-container {
-            width: 90%;
+            width: 100%;
+            max-width: 1200px;
             margin-top: 30px;
             background: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            transition: all 0.3s ease-in-out;
-        }
-
-        .table-container:hover {
-            transform: scale(1.02);
+            overflow-x: auto;
         }
 
         .table {
-            border-collapse: collapse;
             width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* Ensures equal column widths */
         }
 
         .table th,
         .table td {
-            padding: 18px;
+            padding: 10px 15px;
             text-align: center;
-            font-size: 16px;
+            font-size: 14px;
+            word-wrap: break-word; /* Ensure that long text breaks */
+            vertical-align: middle;
         }
 
         .table thead {
@@ -102,10 +102,10 @@
         }
 
         .btn-sm {
-            padding: 8px 16px;
-            margin: 5px;
+            padding: 6px 12px;
+            margin: 3px;
             border-radius: 5px;
-            font-size: 14px;
+            font-size: 12px;
             border: none;
             transition: all 0.3s ease;
         }
@@ -172,33 +172,65 @@
             margin: 20px auto;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        /* Media query for smaller screens */
+        @media (max-width: 768px) {
+            .table th, .table td {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+
+            .table-container {
+                padding: 10px;
+            }
+
+            .btn-sm {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+        }
+
     </style>
 </head>
 
 <body>
     <h3 th:text="${message}"></h3>
     <div class="table-container">
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>ID <i class="fas fa-sort"></i></th>
-                    <th>Email <i class="fas fa-sort"></i></th>
-                    <th>Message <i class="fas fa-sort"></i></th>
                     <th>Name <i class="fas fa-sort"></i></th>
-                    <th>Phone <i class="fas fa-sort"></i></th>
+                    <th>Email <i class="fas fa-sort"></i></th>
+                    <th>Adult <i class="fas fa-sort"></i></th>
+                    <th>Kids<i class="fas fa-sort"></i></th>
+                    <th>Source <i class="fas fa-sort"></i></th>
+                    <th>Target <i class="fas fa-sort"></i></th>
+                    <th>Type <i class="fas fa-sort"></i></th>
+                    <th>Note <i class="fas fa-sort"></i></th>
+                    <th>Date <i class="fas fa-sort"></i></th>
+                    <th>Time <i class="fas fa-sort"></i></th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="contact : ${allcontacts}">
-                    <td th:text="${contact.id}"></td>
-                    <td th:text="${contact.email}"></td>
-                    <td th:text="${contact.message}"></td>
-                    <td th:text="${contact.name}"></td>
-                    <td th:text="${contact.phone}"></td>
+                <tr th:each="booking : ${allbookings}">
+                    <td th:text="${booking.id}"></td>
+                    <td th:text="${booking.name}"></td>
+                    <td th:text="${booking.email}"></td>
+                    <td th:text="${booking.adult}"></td>
+                    <td th:text="${booking.children}"></td>
+                    <td th:text="${booking.source}"></td>
+                    <td th:text="${booking.destination}"></td>
+                    <td th:text="${booking.comfort}"></td>
+                    <td th:text="${booking.message}"></td>
+                    <td th:text="${booking.date}"></td>
+                    <td th:text="${booking.time}"></td>
                     <td>
-                        <button class="btn btn-primary btn-sm">ACTION1</button>
-                        <a th:href="@{/admin/deleteContact/{id}  (id=${contact.id})  }"> <button class="btn btn-danger btn-sm">DELETE</button> </a>
+                        <button class="btn btn-primary btn-sm">ASSIGN</button>
+                        <a th:href="@{/admin/deleteBooking/{id}  (id=${booking.id})  }">
+                            <button class="btn btn-danger btn-sm">DELETE</button>
+                        </a>
                     </td>
                 </tr>
             </tbody>

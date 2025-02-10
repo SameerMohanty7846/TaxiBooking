@@ -34,4 +34,11 @@ public class ContactFormServiceImpl implements ContactFormService {
 		return contactFormCrud.findAll();
 	}
 
+
+
+	@Override
+	public void deleteContactService(Integer id) {
+		contactFormCrud.deleteById(id);		
+	}
+
 }

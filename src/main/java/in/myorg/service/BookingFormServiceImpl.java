@@ -1,5 +1,7 @@
 package in.myorg.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,16 @@ public class BookingFormServiceImpl implements BookingFormService {
 	public BookingFormServiceImpl() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public List<BookingForm> getAllBookingInfo() {
+		return repo.findAll();
+	}
+
+	@Override
+	public void deleteBookingService(Integer id) {
+		repo.deleteById(id);		
 	}
 
 }

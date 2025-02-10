@@ -7,4 +7,8 @@ import in.myorg.model.ContactForm;
 public interface ContactFormService {
 	public ContactForm saveContactForm(ContactForm cf);
 	public List<ContactForm> getAllContactInfo();
+	public void deleteContactService(Integer id);
+
+	
+	
 }
